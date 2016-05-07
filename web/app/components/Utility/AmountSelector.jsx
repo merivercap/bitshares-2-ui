@@ -27,13 +27,12 @@ class AssetSelector extends React.Component {
         value: React.PropTypes.string, // asset id
         assets: React.PropTypes.array, // a translation key for the label
         onChange: React.PropTypes.func
-    }
+    };
 
     constructor(props) {
         super(props);
-
         this.state = {
-            selected: props.assets[0]
+            selected: props.value || props.assets[0]
         }
     }
 
@@ -56,7 +55,7 @@ class AssetSelector extends React.Component {
 
         } else {
             return (
-                <select value={this.state.selected} defaultValue={this.props.value} className="form-control" onChange={this.onChange.bind(this)}>
+                <select value={this.state.selected} className="form-control" onChange={this.onChange.bind(this)}>
                     {options}
                 </select>
                 );
@@ -83,6 +82,10 @@ class AmountSelector extends React.Component {
     static defaultProps = {
         disabled: false
     };
+
+    componentDidMount() {
+        this.onAssetChange(this.props.asset);
+    }
 
     formatAmount(v) {
         // TODO: use asset's precision to format the number
@@ -119,7 +122,6 @@ class AmountSelector extends React.Component {
 
     render() {
         let value = this.formatAmount(this.props.amount);
-        
         return (
             <div className="amount-selector" style={this.props.style}>
                 <div className="float-right">{this.props.display_balance}</div>
@@ -135,7 +137,7 @@ class AmountSelector extends React.Component {
                    <span className="form-label select">
                        <AssetSelector
                            ref={this.props.refCallback}                  
-                           value={this.props.assetValue}
+                           value={this.props.asset.get("id")}
                            assets={this.props.assets}
                            onChange={this.onAssetChange.bind(this)}                           
                        />

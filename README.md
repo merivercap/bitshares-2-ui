@@ -1,6 +1,8 @@
 Graphene-UI
 ============
 
+[![Slack](http://slack.bitshares.org/badge.svg)](http://slack.bitshares.org/)
+
 ### Getting started
 
 Graphene-UI depends on Node.js. While it should work using versions as old as 0.12.x, it is recommended to use v5.x.
@@ -23,7 +25,7 @@ cd graphene-ui
 
 Before launching the GUI you will need to install the npm packages for each subdirectory:
 ```
-cd ../dl; npm install
+cd dl; npm install
 cd ../web; npm install
 ```
 

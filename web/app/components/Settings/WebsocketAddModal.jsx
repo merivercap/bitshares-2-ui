@@ -22,7 +22,9 @@ class WebsocketAddModal extends React.Component {
         if (this.state.protocol === "https:") {
             e.target.value = e.target.value.replace("ws://", "wss://")
         }
-        this.setState({ws: e.target.value});
+        if (e.target.value.indexOf("ws://") !== -1 || e.target.value.indexOf("wss://") !== -1) {
+            this.setState({ws: e.target.value});
+        }
     }
 
     show(e) {
@@ -50,7 +52,13 @@ class WebsocketAddModal extends React.Component {
     onRemoveSubmit(e) {
         e.preventDefault();
         let removeIndex = this.props.apis.indexOf(this.props.api[0]);
+
         SettingsActions.removeWS(removeIndex);
+        SettingsActions.changeSetting.defer({
+            setting: "connection",
+            value: this.props.apis[0]
+        });
+        this.props.changeConnection(this.props.apis[0]);
         this.close();
     }
 

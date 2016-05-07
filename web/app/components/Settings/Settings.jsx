@@ -2,7 +2,6 @@ import React from "react";
 import counterpart from "counterpart";
 import IntlActions from "actions/IntlActions";
 import Translate from "react-translate-component";
-import cookies from "cookies-js";
 import SettingsActions from "actions/SettingsActions";
 import {Link} from "react-router";
 import WebsocketAddModal from "./WebsocketAddModal";
@@ -40,13 +39,24 @@ class SettingsEntry extends React.Component {
 
                 break;
 
+            case "themes":
+                value = selected;
+                options = defaults.map(entry => {
+                    let translationKey = "settings." + entry;
+                    let value = counterpart.translate(translationKey);
+
+                    return <option key={entry} value={entry}>{value}</option>;
+                })
+
+                break;
+
             case "defaultMarkets":
                 options = null;
                 value = null;
                 break;
 
             case "connection":
-                value = connection;
+                value = defaults.indexOf(connection) !== -1 ? connection : defaults[0];
                 options = defaults.map(entry => {
                     let option = entry.translate ? counterpart.translate(`settings.${entry.translate}`) : entry;
                     let key = entry.translate ? entry.translate : entry;
@@ -54,7 +64,8 @@ class SettingsEntry extends React.Component {
                 });
 
                 let defaultConnection = defaults[0];
-                let confirmButton = <div onClick={this._onConfirm.bind(this)} style={{padding: "10px"}}><button className="button outline"><Translate content="transfer.confirm" /></button></div>
+
+                let confirmButton = <div style={{padding: "10px"}}><button onClick={this._onConfirm.bind(this)} className="button outline"><Translate content="transfer.confirm" /></button></div>
 
                 optional = (
                     <div style={{position: "absolute", right: 0, top: "0.2rem"}}>
@@ -69,8 +80,16 @@ class SettingsEntry extends React.Component {
                 input = <input type="text" value={selected} onChange={this.props.onChange.bind(this, setting)}/>
                 break;
 
-            default:
+            case "faucet_address":
+                if (!selected) {
+                    value = "https://";
+                } else {
+                    value = selected;
+                }
+                input = <input type="text" defaultValue={value} onChange={this.props.onChange.bind(this, setting)}/>
+                break;
 
+            default:
                 if (typeof selected === "number") {
                     value = defaults[selected];
                 }
@@ -97,6 +116,8 @@ class SettingsEntry extends React.Component {
                 break;
 
         }
+
+
 
         if (!value && !options) return null;
 
@@ -161,9 +182,12 @@ class Settings extends React.Component {
                 let myLocale = counterpart.getLocale();
                 if (e.target.value !== myLocale) {
                     IntlActions.switchLocale(e.target.value);
-                    cookies.set("graphene_locale", e.target.value, { expires: Infinity });
                     SettingsActions.changeSetting({setting: "locale", value: e.target.value });
                 }
+                break;
+
+            case "themes":
+                SettingsActions.changeSetting({setting: "themes", value: e.target.value });
                 break;
 
             case "defaultMarkets":
@@ -204,6 +228,10 @@ class Settings extends React.Component {
 
     }
 
+    onReset() {
+        SettingsActions.clearSettings();
+    }
+
     render() {
         let {settings, defaults} = this.props;
 
@@ -224,14 +252,22 @@ class Settings extends React.Component {
                                     {...this.state}
                                 />);
                         }).toArray()}
-                        <Link to="wallet"><div className="button outline">
-                            <Translate content="wallet.console" /></div></Link>
+                        <Link to="wallet">
+                            <div className="button outline">
+                                <Translate content="wallet.console" />
+                            </div>
+                        </Link>
+                        <br />
+                        <div onClick={this.onReset} className="button outline" style={{marginTop: 15}}>
+                                <Translate content="settings.reset" />
+                        </div>
                     </div>
                 </div>
                 <WebsocketAddModal
                     ref="ws_modal"
                     apis={defaults["connection"]}
                     api={defaults["connection"].filter(a => {return a === this.state.connection})}
+                    changeConnection={(connection) => {this.setState({connection})}}
                 />
             </div>
         );

@@ -269,7 +269,7 @@ class PriceChart extends React.Component {
 
         let config = {
             chart: {
-                backgroundColor: "rgba(255, 0, 0, 0)",
+                backgroundColor: "rgba(0, 0, 0, 1)",
                 dataGrouping: {
                     enabled: false
                 },

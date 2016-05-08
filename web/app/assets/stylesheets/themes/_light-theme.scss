@@ -3,32 +3,32 @@
 // variables
 
 
-$primary-text-color: darken(#3d3d3d, 10%);
-$secondary-text-color: lighten($primary-text-color, 22%);
-$light-text-color: #3d3d3d;
-$dark-text-color: lighten($light-text-color, 12%);
-$link-text-color: #337ab7;
-$error-text-color: #E3745B;
+$primary-text-color: #000;
+$secondary-text-color: lighten($primary-text-color, 20%);
+$light-text-color: #FFF;
+$dark-text-color: #000;
+$link-text-color: #4A90E2;
+$error-text-color: #FE3939;
 
 $bg-color: #FFF;
-$panel-bg-color: #e5e6e4;
+$panel-bg-color: #0472a7;
 $light-panel-bg-color: #FFF;
 $super-light-panel-bg-color: darken($light-panel-bg-color, 1%);
-$button-bg-color: #2196F3;
-$secondary-button-bg-color: #999999;
+$button-bg-color: #04C959;
+$secondary-button-bg-color: $error-text-color;
 
 $alert-color: $error-text-color;
-$info-color: #CE7925;
+$info-color: #A0A4B8;
 $success-color: #21D19F;
-$warning-color: #f35b92;
-$fee-color: #7f055e;
+$warning-color: lighten($error-text-color, 20%);
+$fee-color: #000;
 
 // Exchange colors
-$bid-color: #258A14;
-$ask-color: #E3745B;
-$call-color: #BBBF2B;
-$positive-color: #6EC105;
-$negative-color: #E1424A;
+$bid-color: #04C959;
+$ask-color: #fe3939;
+$call-color: #57BDFD;
+$positive-color: #04C959;
+$negative-color: #fe3939;
 $row-accent-color: #FFFFFF;
 $header-color: #DCDCDC;
 

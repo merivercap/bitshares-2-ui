@@ -1,9 +1,9 @@
-$bid-color: #50D2C2;
-$ask-color: #E3745B;
+$bid-color: #04C959;
+$ask-color: #fe3939;
 $call-color: #BBBF2B;
 $light-panel-bg-color: #353742;
-$positive-color: #6EC105;
-$negative-color: #E1424A;
+$positive-color: #04C959;
+$negative-color: #fe3939;
 
 .market-layout {
   > .grid-block {
@@ -168,11 +168,11 @@ tr.top-header, tr.bottom-header, tr.spread-row {
 }
 
 .bid-total {
-  color: $bid-color !important;
+  color: $positive-color !important;
 }
 
 .ask-total {
-  color: $ask-color !important;
+  color: $negative-color !important;
 }
 
 .chart-label {
@@ -468,7 +468,7 @@ table thead tr th.mymarkets-header {
 }
 
 .gold-star > svg > path {
-  fill: #CC9F00;
+  fill: #04C959;
 }
 
 .grey-star > svg > path {

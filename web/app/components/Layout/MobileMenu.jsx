@@ -75,8 +75,6 @@ class MobileMenu extends React.Component {
                 </Trigger>
                 <section style={{marginTop: "3rem"}} className="block-list">
                     <ul>
-                        <li>{linkToAccountOrDashboard}</li>
-                        <li><a onClick={this._onNavigate.bind(this, "/explorer")}><Translate component="span" content="header.explorer" /></a></li>
                         {linkedAccounts.size === 0 ? null :
                           <li>{tradeLink}</li>}
                         <li onClick={this.onClick}><Link to="transfer"><Translate component="span" content="header.payments"/></Link></li>

@@ -114,6 +114,7 @@ class Header extends React.Component {
         e.preventDefault();
         ZfApi.publish("account_drop_down", "close");
         AccountActions.setCurrentAccount.defer(account_name);
+        this.context.history.pushState(null, `/account/${account}/overview`);
     }
 
     onClickUser(account, e) {
@@ -157,7 +158,7 @@ class Header extends React.Component {
 
         if (linkedAccounts.size > 0) {
             linkToAccountOrDashboard = (
-                <a className={cnames({active: active === "/" || active.indexOf("dashboard") !== -1})} onClick={this._onNavigate.bind(this, "/dashboard")}>
+                <a className={cnames({active: active.indexOf("account/") !== -1})} onClick={this.onClickUser.bind(this, currentAccount)}>
                     <Translate component="span" content="account.home" />
                 </a>
             );
@@ -238,8 +239,6 @@ class Header extends React.Component {
                         <li>{linkToAccountOrDashboard}</li>
                         <li><a className={cnames({active: active.indexOf("transfer") !== -1})} onClick={this._onNavigate.bind(this, "/transfer")}><Translate component="span" content="header.payments" /></a></li>
                         <li>{tradeLink}</li>
-                        <li><a className={cnames({active: active.indexOf("explorer") !== -1})} onClick={this._onNavigate.bind(this, "/explorer")}><Translate component="span" content="header.explorer" /></a></li>
-                        {currentAccount && myAccounts.indexOf(currentAccount) !== -1 ? <li><Link to={`/deposit-withdraw/`} activeClassName="active"><Translate content="account.deposit_withdraw"/></Link></li> : null}
                     </ul>
                 </div>
                 <div className="grid-block show-for-medium shrink">

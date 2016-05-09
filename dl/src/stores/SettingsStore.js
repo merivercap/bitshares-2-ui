@@ -21,8 +21,8 @@ class SettingsStore {
             unit: CORE_ASSET,
             showSettles: false,
             walletLockTimeout: 60 * 10,
-            themes: "darkTheme",
-            disableChat: false
+            themes: "lightTheme",
+            disableChat: true
         });
 
         this.baseOptions = [CORE_ASSET, "BTC", "USD", "CNY", "OPEN.BTC", "OPEN.USD"];

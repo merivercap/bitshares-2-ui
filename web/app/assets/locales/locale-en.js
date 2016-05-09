@@ -11,10 +11,10 @@
     },
     header: {
         title: "BitShares 2.0",
-        account: "Account",
+        account: "Home",
         dashboard: "Dashboard",
         explorer: "Explore",
-        exchange: "Exchange",
+        exchange: "Trade",
         payments: "Send", // temporary, once we have tabs on Payments, I'll change it back to payments (Valentine)
         logout: "Logout",
         settings: "Settings",
